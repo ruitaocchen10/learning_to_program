@@ -1,0 +1,13 @@
+Space Complexity - the amount of computing memory needed to solve an algorithmic problem
+
+It's a function of the input
+
+Key aspects 
+• Space used by the input
+• Temporal space used by the algorithm, including variables and other data structures
+
+O(1) - Uses fixed amount of memory regardless of input size
+O(n) - Grows linearly with input size
+O(n^2) - Grows exponentially with input size
+
+
