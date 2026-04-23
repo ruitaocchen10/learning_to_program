@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+  <head>
+    <title>User Registry</title>
+  </head>
+  <body>
+    <h2>Add User</h2>
+    <input id="name" placeholder="Name" />
+    <input id="age" placeholder="Age" type="number" />
+    <input id="height" placeholder="Height" type="number" />
+    <button onclick="handleCreate()">Add</button>
+
+    <h2>Users</h2>
+    <ul id="user-list"></ul>
+
+    <script src="api.js"></script>
+    <script>
+      async function handleCreate() {
+        const user = {
+          name: document.getElementById("name").value,
+          age: Number(document.getElementById("age").value),
+          height: Number(document.getElementById("height").value),
+        };
+        await createUser(user);
+        loadUsers();
+      }
+
+      async function loadUsers() {
+        const data = await getUsers();
+        const list = document.getElementById("user-list");
+        list.innerHTML = data.users
+          .map(
+            (u) => `<li>${u[1]} — age ${u[2]}, height
+  ${u[3]}</li>`,
+          )
+          .join("");
+      }
+
+      loadUsers();
+    </script>
+  </body>
+</html>
