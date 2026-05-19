@@ -6,5 +6,6 @@ class VehicleType(Enum):
     truck = "truck"
 
 class Vehicle:
-    def __init__(self, v_type: VehicleType):
+    def __init__(self, name: str, v_type: VehicleType):
+        self.name = name
         self.v_type = v_type

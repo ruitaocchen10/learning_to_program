@@ -58,7 +58,7 @@ class ParkingLot:
             if self.m_lot_full():
                 return -1
             
-            if self.s_lot_full():
+            elif self.s_lot_full():
                 return -1
             
             for spot in self.md_spots:
@@ -70,9 +70,55 @@ class ParkingLot:
                 if spot.state is None:
                     spot.state = vehicle
                     return 1
+                
+        elif vehicle.v_type == "truck":
+            if self.l_lot_full():
+                return -1
+            
+            elif self.m_lot_full():
+                return -1
+            
+            elif self.s_lot_full():
+                return -1
+            
+            for spot in self.lg_spots:
+                if spot.state is None:
+                    spot.state = vehicle
+                    return 1
+            
+            for spot in self.md_spots:
+                if spot.state is None:
+                    spot.state = vehicle
+                    return 1
+
+            for spot in self.s_spots:
+                if spot.state is None:
+                    spot.state = vehicle
+                    return 1
+                
+
+    def exitVehicle(self, vehicle: Vehicle):
+        for lot in self.lots:
+            for spot in lot:
+                if spot.state is vehicle:
+                    spot.state = None
+                    return 1
+        
+        else:
+            return -1
+
 
 lot = ParkingLot()
-lot.evaluateVehicle(Vehicle("car"))
+coopy_car = Vehicle("Coopy", "car")
+ruitao_car = Vehicle("Ruitao", "car")
+jazzy_truck = Vehicle("Jazzy", "truck")
+joe_motorcycle = Vehicle("Joe", "motorcycle")
+lot.evaluateVehicle(ruitao_car)
+lot.evaluateVehicle(coopy_car)
+lot.evaluateVehicle(jazzy_truck)
+lot.evaluateVehicle(joe_motorcycle)
+lot.exitVehicle(coopy_car)
 spots = lot.get_spots()
-for spot in spots[1]:
-    print(spot.printSpot())
+for lot in spots:
+    for spot in lot:
+        print(spot.printSpot())
